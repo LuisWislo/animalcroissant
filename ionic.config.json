@@ -1,0 +1,7 @@
+{
+  "name": "animal-croissant",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
