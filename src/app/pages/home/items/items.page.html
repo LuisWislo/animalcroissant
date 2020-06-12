@@ -1,9 +1,17 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>items</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header pageTitle="Items"></app-header>
 
-<ion-content>
+<form [formGroup]="itemsForm">
+  <ion-searchbar formControlName="search" (input)="onChange($event)"></ion-searchbar>
+</form>
+  
+<ion-content class="bg-beige">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let o of test" size-xs="12" size-sm="4" size-xl="3">
+        <app-item></app-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 
 </ion-content>
