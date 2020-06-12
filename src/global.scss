@@ -24,3 +24,44 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+
+.bg-green {
+    --ion-background-color: #9DF6C6;
+}
+
+.bg-beige {
+    --ion-background-color: #F7F3EF;
+}
+
+.bg-blue {
+    --ion-background-color: #98F3EE;
+}
+
+ion-label, ion-item {
+    color: #414145;
+}
+
+ion-title {
+    color: #56565c;
+}
+
+ion-grid {
+    height: 100%;
+}
+
+.main-row {
+    height: 100%;
+}
+
+.col-bg {
+    background-color: #f0eae6;
+    border-radius: 10px;
+}
+
+.raw-container {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
