@@ -9,7 +9,7 @@ const routes: Routes = [
     component: VillagersPage
   },
   {
-    path: ':villager',
+    path: ':name',
     loadChildren: () => import('./villager/villager.module').then( m => m.VillagerPageModule)
   }
 ];

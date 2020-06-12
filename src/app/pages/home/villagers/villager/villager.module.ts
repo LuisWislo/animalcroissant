@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { VillagerPageRoutingModule } from './villager-routing.module';
 
 import { VillagerPage } from './villager.page';
+import { HeaderModule } from '../../../../components/header/header.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VillagerPageRoutingModule
+    VillagerPageRoutingModule,
+    HeaderModule
   ],
   declarations: [VillagerPage]
 })

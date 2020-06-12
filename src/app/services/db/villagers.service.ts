@@ -24,9 +24,17 @@ export class VillagersService {
   getAllVillagers() : Observable<Villager[]> {
     return this.http.get<Villager[]>(this.baseUrl + '/get_all_villagers');    
   }
+
+  getVillager(villagerName : string) : Observable<Villager> {
+    return this.http.get<Villager>(this.baseUrl + '/get_villager/' + villagerName);    
+  }
   
   getAllItems() : Observable<Item[]>{
     return this.http.get<Item[]>(this.baseUrl + '/get_all_items');    
+  }
+
+  addFavorite(username : string, villager : string) {
+    return this.http.post<any>(this.baseUrl + "/add_villager", {username: username, villager: villager});
   }
 
   //USER
