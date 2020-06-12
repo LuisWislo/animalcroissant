@@ -24,9 +24,15 @@ export class VillagersService {
   getAllVillagers() : Observable<Villager[]> {
     return this.http.get<Villager[]>(this.baseUrl + '/get_all_villagers');    
   }
+
+  //ITEMS
   
   getAllItems() : Observable<Item[]>{
     return this.http.get<Item[]>(this.baseUrl + '/get_all_items');    
+  }
+
+  getManyItems(many : number) : Observable<Item[]>{
+    return this.http.get<Item[]>(this.baseUrl + '/get_many_items/' + many);    
   }
 
   //USER

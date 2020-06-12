@@ -11,6 +11,10 @@ import { VillagersService } from 'src/app/services/db/villagers.service';
 })
 export class ItemsPage implements OnInit {
 
+  pageItems = 25
+  page = 0
+  //maximunPages = 20
+
   items : Item[] = [];
 
   itemsForm : FormGroup;
@@ -29,23 +33,33 @@ export class ItemsPage implements OnInit {
 
   ionViewWillEnter() {
     this.pageSubscriptions = new Subscription();
-    this.setup();
   }
 
   ionViewWillLeave() {
     this.pageSubscriptions.unsubscribe();
   }
 
-  setup() {
-    let setupObs = this.db.getAllItems();
-    this.pageSubscriptions.add(setupObs.subscribe(
+  loadUsers(infiniteScroll?) {
+    this.db.getManyItems(50).subscribe(
       (items : Item[]) => {
-        this.items = items;
+        this.items = this.items.concat(items);
+        if (infiniteScroll) {
+          infiniteScroll.complete();
+        }
       }, () => {
         console.log("Error retrieving items")
       }
-    ));
-    
+    )
+  }
+
+  loadMore(infiniteScroll) {
+    this.page++;
+    this.loadUsers(infiniteScroll);
+    /*
+    if (this.page === this.maximumPages) {
+      infiniteScroll.enable(false);
+    }
+    */
   }
 
   onChange(data : InputEvent) {
