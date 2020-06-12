@@ -1,9 +1,13 @@
 <app-header pageTitle="Villagers"></app-header>
 
+<form [formGroup]="villagersForm">
+  <ion-searchbar formControlName="search" (input)="filterVillagers($event)"></ion-searchbar>
+</form>
+
 <ion-content class="bg-beige">
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let v of villagers" size-xs="12" size-sm="4" size-xl="2">
+      <ion-col *ngFor="let v of filteredVillagers" size-xs="12" size-sm="4" size-xl="2">
         <app-villager-item [villager]="v" (click)="goToVillager(v.name)"></app-villager-item>
       </ion-col>
     </ion-row>

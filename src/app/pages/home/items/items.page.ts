@@ -12,6 +12,9 @@ import { VillagersService } from 'src/app/services/db/villagers.service';
 export class ItemsPage implements OnInit {
 
   items : Item[] = [];
+  filteredItems : Item[] = [];
+  pageItems = 25
+  page = 0
 
   itemsForm : FormGroup;
   pageSubscriptions : Subscription;
@@ -25,11 +28,12 @@ export class ItemsPage implements OnInit {
     this.itemsForm = this.formBuilder.group({
       search: []
     });
+    this.setup();
   }
 
   ionViewWillEnter() {
     this.pageSubscriptions = new Subscription();
-    this.setup();
+    
   }
 
   ionViewWillLeave() {
@@ -38,18 +42,63 @@ export class ItemsPage implements OnInit {
 
   setup() {
     let setupObs = this.db.getAllItems();
-    this.pageSubscriptions.add(setupObs.subscribe(
+    setupObs.subscribe(
       (items : Item[]) => {
         this.items = items;
+        this.filteredItems = this.items;
       }, () => {
         console.log("Error retrieving items")
       }
-    ));
+    )
     
+  }
+
+  loadMore(infiniteScroll) {
+    this.page++;
+    this.loadUsers(infiniteScroll);
+    /*
+    if (this.page === this.maximumPages) {
+      infiniteScroll.enable(false);
+    }
+    */
   }
 
   onChange(data : InputEvent) {
     console.log(data.data)
+  }
+
+  loadUsers(infiniteScroll?) {
+    this.db.getManyItems(50).subscribe(
+      (items : Item[]) => {
+        this.items = this.items.concat(items);
+        if (infiniteScroll) {
+          infiniteScroll.complete();
+        }
+      }, () => {
+        console.log("Error retrieving items")
+      }
+    )
+  }
+
+  filterItems(input) {
+    this.filteredItems = this.items;
+    let value : string = input.srcElement.value;
+    
+    if(!value) {
+      return;
+    }
+
+    this.filteredItems = this.filteredItems.filter((v : Item) => {
+      if(v.name) {
+        if(v.name.toLowerCase().indexOf(value.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    })
+
+
+
   }
 
 }

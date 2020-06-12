@@ -33,6 +33,10 @@ export class VillagersService {
     return this.http.get<Item[]>(this.baseUrl + '/get_all_items');    
   }
 
+  getManyItems(many : number) : Observable<Item[]>{
+    return this.http.get<Item[]>(this.baseUrl + '/get_many_items/' + many);    
+  }
+
   addFavorite(username : string, villager : string) {
     return this.http.post<any>(this.baseUrl + "/add_villager", {username: username, villager: villager});
   }

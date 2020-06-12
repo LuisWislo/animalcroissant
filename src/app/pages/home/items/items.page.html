@@ -1,7 +1,7 @@
 <app-header pageTitle="Items"></app-header>
 
 <form [formGroup]="itemsForm">
-  <ion-searchbar formControlName="search" (input)="onChange($event)"></ion-searchbar>
+  <ion-searchbar formControlName="search" (input)="filterItems($event)"></ion-searchbar>
 </form>
   
 <ion-content class="bg-beige">
@@ -12,6 +12,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!--<ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading Users...">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>-->
   
 
 </ion-content>
