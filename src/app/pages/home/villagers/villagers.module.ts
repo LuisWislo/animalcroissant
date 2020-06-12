@@ -8,12 +8,17 @@ import { VillagersPageRoutingModule } from './villagers-routing.module';
 
 import { VillagersPage } from './villagers.page';
 
+import { HeaderModule } from '../../../components/header/header.module';
+import { VillagerItemModule } from '../../../components/villager-item/villager-item.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VillagersPageRoutingModule
+    VillagersPageRoutingModule,
+    HeaderModule,
+    VillagerItemModule
   ],
   declarations: [VillagersPage]
 })

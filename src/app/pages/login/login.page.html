@@ -1,9 +1,50 @@
+<ion-header class="bg-green">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Animal Croissant</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="bg-beige">
     <ion-grid>
         <ion-row class="ion-align-items-center ion-justify-content-center main-row">
-            <ion-col size-xs="12" size-md="9" size-xl="5">
+            <ion-col size-xs="12" size-md="4" size-xl="3">
                 <ion-row>
                     <ion-col class="col-bg">
+                      <br>
+                      <ion-row>
+                        <ion-col class="ion-text-center">
+                          <ion-label style="font-size: x-large;"> Animal Croissant </ion-label>
+                        </ion-col>
+                      </ion-row>
+                      <br><br>
+                      <ion-row class="ion-padding">
+                        <ion-col>
+                          <form [formGroup]="loginForm">
+                            <ion-item>
+                              <ion-label>Username</ion-label>
+                              <ion-input formControlName="username"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                              <ion-label>Password</ion-label>
+                              <ion-input formControlName="password" type="password"></ion-input>
+                            </ion-item>
+                          </form>    
+                        </ion-col>
+                      </ion-row>
+                      <ion-row class="ion-padding">
+                        <ion-col>
+                          <ion-button expand="block" (click)="validateForm()">Login</ion-button>
+                        </ion-col>
+                      </ion-row>
+                      <br><br>
+                      <ion-row>
+                        <ion-col class="ion-text-center"> 
+                          <ion-label (click)="goToRegister()">Register</ion-label>
+                        </ion-col>
+                      </ion-row>
+                      <br>
 
                     </ion-col>
                 </ion-row>

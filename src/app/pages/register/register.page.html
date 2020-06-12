@@ -1,0 +1,65 @@
+<ion-header class="bg-green">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title (click)="goToRoot()">Animal Croissant</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg-beige">
+  <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-center main-row">
+          <ion-col size-xs="12" size-md="5" >
+              <ion-row>
+                  <ion-col class="col-bg">
+                    <br>
+                    <ion-row>
+                      <ion-col class="ion-text-center">
+                        <ion-label style="font-size: x-large;"> Register </ion-label>
+                      </ion-col>
+                    </ion-row>
+                    <br><br>
+                    <ion-row class="ion-padding">
+                      <ion-col>
+                        <form [formGroup]="registerForm">
+                          <ion-label style="font-size:larger;">Account:</ion-label><br><br><br>
+                          <ion-label>Username:</ion-label>
+                          <ion-item>
+                            <ion-input formControlName="username"></ion-input>
+                          </ion-item>
+                          <br>
+                          <ion-label>Password:</ion-label>
+                          <ion-item>
+                            <ion-input formControlName="password" type="password"></ion-input>
+                          </ion-item>
+                          <br><br><br>
+                          <ion-label style="font-size:larger;">Island info:</ion-label><br><br><br>
+                          <ion-label>Island Name:</ion-label>
+                          <ion-item>
+                            <ion-input formControlName="island_name" ></ion-input>
+                          </ion-item>
+                          <br>
+                          <ion-label>Official Island Fruit:</ion-label>
+                          <ion-item>
+                            <ion-select interface="popover" formControlName="fruit">
+                              <ion-select-option *ngFor="let f of selectOps" [value]="f.value">{{f.name}}</ion-select-option>
+                            </ion-select>
+                          </ion-item>
+                          
+                        </form>    
+                      </ion-col>
+                    </ion-row>
+                    <ion-row class="ion-padding">
+                      <ion-col>
+                        <ion-button expand="block" (click)="validateForm()">Register</ion-button>
+                      </ion-col>
+                    </ion-row>
+                    <br><br>
+
+                  </ion-col>
+              </ion-row>
+              
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

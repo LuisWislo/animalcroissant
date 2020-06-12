@@ -17,11 +17,6 @@ export class HomePage implements OnInit {
       icon: "card-outline"
     },
     {
-      name: "My Island",
-      route: "/home/island",
-      icon: "golf-outline"
-    },
-    {
       name: "Villagers",
       route: "/home/villagers",
       icon: "paw-outline"

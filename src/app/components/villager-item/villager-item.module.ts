@@ -3,18 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { IslandPageRoutingModule } from './island-routing.module';
-
-import { IslandPage } from './island.page';
+import { VillagerItemComponent } from './villager-item.component';
 
 @NgModule({
+  declarations: [VillagerItemComponent],
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
-    IslandPageRoutingModule
+    IonicModule
   ],
-  declarations: [IslandPage]
+  exports: [VillagerItemComponent]
 })
-export class IslandPageModule {}
+export class VillagerItemModule { }
