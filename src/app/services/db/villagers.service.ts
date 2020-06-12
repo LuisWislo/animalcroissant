@@ -14,14 +14,19 @@ export class VillagersService {
 
   constructor(private http : HttpClient) { }
 
+  //REGISTER
+  register(user : User) {
+    return this.http.post<any>(this.baseUrl + "/register_user", user);
+  }
+
   // VILLAGERS
 
   getAllVillagers() : Observable<Villager[]> {
-    return this.http.get<Villager[]>(this.baseUrl + '/villagers');    
+    return this.http.get<Villager[]>(this.baseUrl + '/get_all_villagers');    
   }
   
   getAllItems() : Observable<Item[]>{
-    return this.http.get<Item[]>(this.baseUrl + '/items');    
+    return this.http.get<Item[]>(this.baseUrl + '/get_all_items');    
   }
 
   //USER

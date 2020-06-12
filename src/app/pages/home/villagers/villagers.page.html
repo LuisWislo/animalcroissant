@@ -3,8 +3,8 @@
 <ion-content class="bg-beige">
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let o of test" size-xs="12" size-sm="4" size-xl="2">
-        <app-villager-item></app-villager-item>
+      <ion-col *ngFor="let v of villagers" size-xs="12" size-sm="4" size-xl="2">
+        <app-villager-item [villager]="v"></app-villager-item>
       </ion-col>
     </ion-row>
   </ion-grid>

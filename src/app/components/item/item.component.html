@@ -3,28 +3,28 @@
     <ion-row class="raw-container">
       <ion-col class="raw-container bg">
         <br>
-        <ion-img style="height: 100px; width: auto;" src="https://villagerdb.com/images/items/full/acid-washed-jeans.b25de9d.png"></ion-img>
+        <ion-img style="height: 100px; width: auto;" [src]="item.image_url"></ion-img>
         <br>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-label style="font-size: larger;">Name</ion-label>
+        <ion-label style="font-size: larger;">{{item.name}}</ion-label>
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding-start">
       <ion-col>
-        <ion-label><b>Category: </b></ion-label>
+        <ion-label><b>Category: </b>{{item.category}}</ion-label>
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding-start">
       <ion-col>
-        <ion-label><b>Buy at: </b> bells</ion-label>
+        <ion-label><b>Buy at: </b> {{item.buy_value}} bells</ion-label>
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding-start">
       <ion-col>
-        <ion-label><b>Sell at: </b> bells</ion-label>
+        <ion-label><b>Sell at: </b> {{item.sell_value}} bells</ion-label>
       </ion-col>
     </ion-row>
   </ion-col>

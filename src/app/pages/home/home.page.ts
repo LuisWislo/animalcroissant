@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { VillagersService } from 'src/app/services/db/villagers.service';
 import { Subscription } from 'rxjs';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { User } from 'src/app/entities/user';
+import { concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -28,11 +31,15 @@ export class HomePage implements OnInit {
     }
   ]
 
+  user : User;
+
   pageSubscriptions : Subscription;
 
   constructor(
     private db : VillagersService,
-    private menu : MenuController
+    private menu : MenuController,
+    private auth : AuthService,
+    private nav : NavController
   ) { }
 
   ngOnInit() {
@@ -41,25 +48,26 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     this.pageSubscriptions = new Subscription();
-    this.getAllVillagers();
+    this.setup();
   }
 
-  getAllVillagers() {
-    this.pageSubscriptions.add(
-      this.db.getAllVillagers().subscribe(
-        res => {
-          console.log(res);
-        }
-      )
-    );
-
-    this.pageSubscriptions.add(
-      this.db.getAllItems().subscribe(
-        res => {
-          console.log(res);
-        }
-      )
+  setup() {
+    let loadObs = 
+    this.auth.loggedInUser.pipe(
+      concatMap((username : string) => {
+        return this.db.getUser(username);
+      })
     )
+
+    this.pageSubscriptions.add(loadObs.subscribe(
+      (user : User) => {
+        this.user = user;
+        console.log(user)
+      },
+      (err) => {
+        console.log(err);
+      }
+    ));
 
   }
 
@@ -68,7 +76,11 @@ export class HomePage implements OnInit {
   }
 
   logout() {
-    console.log("logging out");
+    this.auth.logout().subscribe(
+      () => {
+        this.nav.navigateRoot("/");
+      }
+    )
   }
 
 

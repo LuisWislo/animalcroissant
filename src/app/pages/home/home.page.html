@@ -6,7 +6,7 @@
           <ion-avatar slot="start">
             <img src="assets/img/placeholder.png"/>
           </ion-avatar>
-          <ion-title class="ion-no-padding">Charlie</ion-title>
+          <ion-title *ngIf="user" class="ion-no-padding">{{user.username}}</ion-title>
         </ion-item>
       </ion-toolbar>
       

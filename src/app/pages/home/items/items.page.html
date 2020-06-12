@@ -7,8 +7,8 @@
 <ion-content class="bg-beige">
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let o of test" size-xs="12" size-sm="4" size-xl="3">
-        <app-item></app-item>
+      <ion-col *ngFor="let i of items" size-xs="12" size-sm="4" size-xl="3">
+        <app-item [item]="i" ></app-item>
       </ion-col>
     </ion-row>
   </ion-grid>

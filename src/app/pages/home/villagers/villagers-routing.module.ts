@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: VillagersPage
+  },
+  {
+    path: ':villager',
+    loadChildren: () => import('./villager/villager.module').then( m => m.VillagerPageModule)
   }
 ];
 

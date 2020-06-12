@@ -8,6 +8,7 @@ import { PassportPageRoutingModule } from './passport-routing.module';
 
 import { PassportPage } from './passport.page';
 import { HeaderModule } from '../../../components/header/header.module';
+import { VillagerItemModule } from '../../../components/villager-item/villager-item.module'; 
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HeaderModule } from '../../../components/header/header.module';
     FormsModule,
     IonicModule,
     PassportPageRoutingModule,
-    HeaderModule
+    HeaderModule,
+    VillagerItemModule
   ],
   declarations: [PassportPage]
 })
