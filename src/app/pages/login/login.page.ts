@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { VillagersService } from 'src/app/services/db/villagers.service';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -18,7 +18,8 @@ export class LoginPage implements OnInit {
     private formBuilder : FormBuilder,
     private db : VillagersService,
     private nav : NavController,
-    private auth : AuthService
+    private auth : AuthService,
+    private alertController : AlertController
   ) { }
 
   ngOnInit() {
@@ -40,19 +41,27 @@ export class LoginPage implements OnInit {
           if(res) {
             this.nav.navigateForward('/home/passport');
           } else {
-            console.log("bad credentials");
+            this.presentAlert("Bad Credentials");
           }
         }
       );
       
     } else {
-      console.log("Llenar campos!");
+      this.presentAlert("Please enter all fields.");
     }
   
   }
 
   goToRegister() {
     this.nav.navigateForward("/register");
+  }
+
+  async presentAlert(message : string) {
+    const alert = await this.alertController.create({
+      message: message,
+      buttons: ['Ok']
+    });
+    await alert.present();
   }
 
 }

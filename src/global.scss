@@ -60,6 +60,20 @@ ion-grid {
     border-radius: 10px;
 }
 
+.search-bg {
+    background-color: #f0eae6;
+}
+
+ion-searchbar {
+    .searchbar-input-container {
+        .searchbar-input {
+            box-shadow: none;
+            background-color: #f0eae6;
+        }
+    }
+    
+}
+
 .raw-container {
     border: 0;
     margin: 0;

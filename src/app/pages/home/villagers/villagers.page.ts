@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { VillagersService } from 'src/app/services/db/villagers.service';
-import { Subscription } from 'rxjs';
+import { Subscription, from } from 'rxjs';
 import { Villager } from 'src/app/entities/villager';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController, AlertController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { concatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-villagers',
@@ -24,7 +25,9 @@ export class VillagersPage implements OnInit {
   constructor(
     private db : VillagersService,
     private nav : NavController,
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+    private loadingController : LoadingController,
+    private alertController : AlertController
   ) { }
 
   ngOnInit() {
@@ -45,14 +48,20 @@ export class VillagersPage implements OnInit {
   }
 
   setup() {
-    let setupObs = this.db.getAllVillagers();
+    let setupObs = from(this.presentLoading()).pipe(
+      concatMap(() => {
+        return this.db.getAllVillagers();
+      })
+    )
 
     setupObs.subscribe(
       (villagers : Villager[]) => {
+        this.loadingController.dismiss();
         this.villagers = villagers;
         this.filteredVillagers = this.villagers;
       }, () => {
-        console.log("Error retrieving villagers")
+        this.loadingController.dismiss();
+        this.presentAlert("Error retrieving data.");
       }
     )
 
@@ -80,9 +89,20 @@ export class VillagersPage implements OnInit {
       }
     })
 
-
-
   }
 
+  async presentLoading() {
+    const loading = await this.loadingController.create({});
+    await loading.present();
+  }
+
+
+  async presentAlert(message : string) {
+    const alert = await this.alertController.create({
+      message: message,
+      buttons: ['Ok']
+    });
+    await alert.present();
+  }
 
 }

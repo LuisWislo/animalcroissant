@@ -1,13 +1,16 @@
 <app-header pageTitle="Items"></app-header>
 
-<form [formGroup]="itemsForm">
-  <ion-searchbar formControlName="search" (input)="filterItems($event)"></ion-searchbar>
+<form *ngIf="itemsForm" [formGroup]="itemsForm">
+  <ion-searchbar class="search-bg" formControlName="search" (input)="filterItems($event)"></ion-searchbar>
+  <ion-select (ionChange)="getItemsByCategory()" class="search-bg" interface="action-sheet" formControlName="select">
+    <ion-select-option *ngFor="let c of categories" [value]="c.category">{{c.category}}</ion-select-option>
+  </ion-select>
 </form>
   
 <ion-content class="bg-beige">
   <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let i of items" size-xs="12" size-sm="4" size-xl="3">
+    <ion-row *ngIf="filteredItems">
+      <ion-col *ngFor="let i of filteredItems" size-xs="12" size-sm="4" size-xl="3">
         <app-item [item]="i" ></app-item>
       </ion-col>
     </ion-row>

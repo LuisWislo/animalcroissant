@@ -1,7 +1,7 @@
 <app-header pageTitle="Villagers"></app-header>
 
 <form [formGroup]="villagersForm">
-  <ion-searchbar formControlName="search" (input)="filterVillagers($event)"></ion-searchbar>
+  <ion-searchbar class="search-bg" formControlName="search" (input)="filterVillagers($event)"></ion-searchbar>
 </form>
 
 <ion-content class="bg-beige">

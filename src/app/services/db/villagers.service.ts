@@ -41,6 +41,14 @@ export class VillagersService {
     return this.http.post<any>(this.baseUrl + "/add_villager", {username: username, villager: villager});
   }
 
+  getCategories() : Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "/get_categories");
+  }
+
+  getItemsByCategory(category : string) {
+    return this.http.get<any>(this.baseUrl + "/get_item_category/" + category);
+  }
+
   //USER
 
   getUser(username : string) : Observable<User> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { User } from 'src/app/entities/user';
 import { VillagersService } from 'src/app/services/db/villagers.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -41,11 +41,16 @@ export class RegisterPage implements OnInit {
     private formBuilder : FormBuilder,
     private nav : NavController,
     private db : VillagersService,
-    private auth : AuthService
+    private auth : AuthService,
+    private alertController : AlertController
   ) { }
 
   ngOnInit() {
     this.setup();
+  }
+
+  ionViewWillEnter() {
+    this.presentAlert("This is a school project, do NOT put any actual password that you care about, they are not secured!");
   }
 
   setup() {
@@ -72,18 +77,18 @@ export class RegisterPage implements OnInit {
                 if(resp) {
                   this.nav.navigateForward("/home/passport");
                 } else {
-                  console.log("cant login")
+                  this.presentAlert("Error logging in.");
                 }
               }
             )
           } else {
             //ALERT
-            console.log("Repeated User!")
+            this.presentAlert("Username already taken.");
           }
         }
       );
     } else {
-      console.log("invalid form")
+      this.presentAlert("Please enter all required fields.");
     }
   }
 
@@ -104,6 +109,14 @@ export class RegisterPage implements OnInit {
 
   goToRoot() {
     this.nav.navigateRoot("/");
+  }
+
+  async presentAlert(message : string) {
+    const alert = await this.alertController.create({
+      message: message,
+      buttons: ['Ok']
+    });
+    await alert.present();
   }
 
 
